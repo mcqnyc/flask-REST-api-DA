@@ -23,7 +23,7 @@ class StoreTest(BaseTest):
         # Test delete endpoint
         response = self.client.delete(f'/store/{store_id}')
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.get_json()["message"], "Store deleted.")
+        self.assertEqual(response.get_json()["message"], "Store deleted")
 
     def test_delete_store_not_found(self):
         response = self.client.delete('/store/nonexistent')
