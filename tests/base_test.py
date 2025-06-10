@@ -1,6 +1,6 @@
 import unittest
 from app import create_app
-from db import stores
+from db import db
 
 class BaseTest(unittest.TestCase):
     def setUp(self):
@@ -8,12 +8,19 @@ class BaseTest(unittest.TestCase):
         self.app.config.update({
             "TESTING": True,
             "PROPAGATE_EXCEPTIONS": True,
+            "SQLALCHEMY_DATABASE_URI": "sqlite:///:memory:",
+            "SQLALCHEMY_TRACK_MODIFICATIONS": False
         })
+        
         self.client = self.app.test_client()
-        stores.clear()
+        self.app_context = self.app.app_context()
+        self.app_context.push()
+        db.create_all()
 
     def tearDown(self):
-        stores.clear()
+        db.session.remove()
+        db.drop_all()
+        self.app_context.pop()
 
 if __name__ == '__main__':
     unittest.main()
