@@ -16,7 +16,6 @@ def create_app(db_url=None):
     
     api = Api(app)
     
-    # Register blueprints
     api.register_blueprint(StoreBlueprint)
     api.register_blueprint(ItemBlueprint)
     
