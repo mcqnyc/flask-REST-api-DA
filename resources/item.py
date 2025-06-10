@@ -7,7 +7,6 @@ from sqlalchemy.exc import SQLAlchemyError
 
 from db import db
 from models import ItemModel
-# from db import items
 
 blp = Blueprint("Items", __name__, description="Operations on items")
 
